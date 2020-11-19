@@ -1,5 +1,5 @@
 parseOptions:
-  sourseType: 'module'
+  sourceType: 'module'
   ecmaVersion: 2015
   
 env:
