@@ -3,6 +3,7 @@ import {createEditPointTemplate} from './view/edit-point.js';
 import {createFiltersTemplate} from './view/filter.js';
 import {createListSortTemplate} from './view/list-sort.js';
 import {createMenuTemplate} from './view/menu.js';
+import {createpointsListTemplate} from './view/points-list.js';
 import {createPointTemplate} from './view/point.js';
 import {createRouteInfoTemplate} from './view/route-info.js';
 import {createRoutePriceTemplate} from './view/route-price.js';
@@ -37,15 +38,21 @@ render(tripFilterTitle, createFiltersTemplate(), 'afterend');
 // Добавим сортировку
 render(tripeventsTitle, createListSortTemplate(), 'afterend');
 
+// Добавим <ul> для будущего списка пунктов
+render(tripeventsSection, createpointsListTemplate(), 'beforeend');
+
+// Найдем только что добавленный <ul>
+const pointsList = document.querySelector('.trip-events__list');
+
 // Добавим форму редактора пункта
-render(tripeventsSection, createEditPointTemplate(), 'beforeend');
+render(pointsList, createEditPointTemplate(), 'afterbegin');
 
 // Добавим форму добавления нового пункта
-render(tripeventsSection, addNewPointTemplate(), 'beforeend');
+render(pointsList, addNewPointTemplate(), 'beforeend');
 
 // Добавим список пунктов
 for (let i = 0; i < pointsCount; i++) {
-  render(tripeventsSection, createPointTemplate(), 'beforeend');
+  render(pointsList, createPointTemplate(), 'beforeend');
 }
 
 
