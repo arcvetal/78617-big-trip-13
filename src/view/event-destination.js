@@ -11,6 +11,6 @@ export const createEventDestinationTemplate = (isGalleryShown) => {
         <img class="event__photo" src="img/photos/4.jpg" alt="Event photo">
         <img class="event__photo" src="img/photos/5.jpg" alt="Event photo">
       </div>
-    </div>` : ''}
+    </div>` : ``}
   </section>`;
 };
