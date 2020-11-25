@@ -84,7 +84,7 @@ export const generateTripPoint = () => {
     typeTripPoint: generateTripPointType(),
     city: generateCity(),
     offersList: generateOffers(),
-    description: generateDescription();
+    description: generateDescription(),
     photoGallery: generatePhotoGallery()
   }
 };
