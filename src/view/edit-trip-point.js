@@ -3,10 +3,10 @@ import {createEventOfferTemplate} from './event-offer.js';
 import {createEventDestinationTemplate} from './event-destination.js';
 
 
-export const createEditTripPointTemplate = () => {
+export const createEditTripPointTemplate = (tripObj) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
-      ${createEventHeaderTemplate()}
+      ${createEventHeaderTemplate(tripObj)}
       ${createEventOfferTemplate()}
       ${createEventDestinationTemplate()}
     </form>
