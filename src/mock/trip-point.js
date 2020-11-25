@@ -84,7 +84,9 @@ export const generateTripPoint = () => {
     typeTripPoint: generateTripPointType(),
     city: generateCity(),
     offersList: generateOffers(),
-    description: generateDescription();
-    photoGallery: generatePhotoGallery()
+    description: generateDescription(),
+    photoGallery: generatePhotoGallery(),
+    tripPrice: getRandomInt(50, 200),
+    isFavorite: Boolean(getRandomInt(0, 1))
   }
 };

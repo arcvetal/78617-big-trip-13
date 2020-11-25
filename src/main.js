@@ -8,7 +8,10 @@ import {createTripPointTemplate} from './view/trip-point.js';
 import {createTripInfoTemplate} from './view/trip-info.js';
 import {createTripPriceTemplate} from './view/trip-price.js';
 
-const POINTS_COUNT = 3;
+// Mocks
+import {generateTripPoint} from './mock/trip-point.js';
+
+const POINTS_COUNT = 17;
 
 const tripMainElement = document.querySelector('.trip-main');
 const tripMenuTitleElement = document.querySelector('.trip-controls :first-child');
@@ -48,7 +51,31 @@ render(tripPointsListElement, createEditTripPointTemplate(), 'afterbegin');
 // Добавим форму добавления нового пункта
 render(tripPointsListElement, addNewTripPointTemplate(), 'beforeend');
 
+
+
+// Generate mocks array
+const generateMocksCollection = (generatedItemCallback) => {
+  const mocksCollection = [];
+  const MOCKS_COUNT = 20;
+
+  for (let i = 0; i < MOCKS_COUNT; i++) {
+    mocksCollection.push(generatedItemCallback());
+  }
+
+  return mocksCollection;
+};
+
+const tripPointsCollection = generateMocksCollection(generateTripPoint);
+
+
+
 // Добавим список пунктов
 for (let i = 0; i < POINTS_COUNT; i++) {
-  render(tripPointsListElement, createTripPointTemplate(), 'beforeend');
+  render(tripPointsListElement, createTripPointTemplate(tripPointsCollection[i]), 'beforeend');
 }
+
+//
+
+
+
+
