@@ -9,7 +9,8 @@ import {createTripInfoTemplate} from './view/trip-info.js';
 import {createTripPriceTemplate} from './view/trip-price.js';
 
 // Mocks
-import {generateTripPoint} from './mock/trip-point.js';
+import {generateTripPoint} from './mock/mocks.js';
+import {generateMocksCollection} from './mock/mocks.js';
 
 const POINTS_COUNT = 17;
 
@@ -52,19 +53,12 @@ render(tripPointsListElement, addNewTripPointTemplate(), 'beforeend');
 
 
 
-// Generate mocks array
-const generateMocksCollection = (generatedItemCallback) => {
-  const mocksCollection = [];
-  const MOCKS_COUNT = 20;
+// Сгенерируем масив обьектов-моков
 
-  for (let i = 0; i < MOCKS_COUNT; i++) {
-    mocksCollection.push(generatedItemCallback());
-  }
-
-  return mocksCollection;
-};
 
 const tripPointsCollection = generateMocksCollection(generateTripPoint);
+
+console.log(tripPointsCollection);
 
 // Добавим форму редактора пункта
 render(tripPointsListElement, createEditTripPointTemplate(tripPointsCollection[0]), 'afterbegin');

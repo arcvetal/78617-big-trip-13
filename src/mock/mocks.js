@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 
 const getRandomInt = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -65,10 +66,13 @@ const generateDescription = () => {
   for (let i = 0; i < randomCountDescription; i++) {
     randomDescriptionList.push(descriptionList[getRandomInt(0, lastIndex)])
   }
+  const descr = randomDescriptionList.join(' ');
+
+  return descr;
 };
 
 const generatePhotoGallery = () => {
-  const MAX_COUNT = 7;
+  const MAX_COUNT = 5;
 
   const photoList = [];
 
@@ -89,4 +93,15 @@ export const generateTripPoint = () => {
     tripPrice: getRandomInt(50, 200),
     isFavorite: Boolean(getRandomInt(0, 1))
   }
+};
+
+export const generateMocksCollection = (generatedItemCallback) => {
+  const mocksCollection = [];
+  const MOCKS_COUNT = 20;
+
+  for (let i = 0; i < MOCKS_COUNT; i++) {
+    mocksCollection.push(generatedItemCallback());
+  }
+
+  return mocksCollection;
 };
