@@ -64,7 +64,7 @@ console.log(tripPointsCollection);
 render(tripPointsListElement, createEditTripPointTemplate(tripPointsCollection[0]), 'afterbegin');
 
 // Добавим список пунктов
-for (let i = 0; i < POINTS_COUNT; i++) {
+for (let i = 1; i < POINTS_COUNT; i++) {
   render(tripPointsListElement, createTripPointTemplate(tripPointsCollection[i]), 'beforeend');
 }
 
