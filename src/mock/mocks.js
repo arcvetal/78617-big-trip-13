@@ -99,7 +99,7 @@ const generateDescription = () => {
   let randomDescriptionList = [];
 
   for (let i = 0; i < randomCountDescription; i++) {
-    randomDescriptionList.push(descriptionList[getRandomInt(0, lastIndex)])
+    randomDescriptionList.push(descriptionList[getRandomInt(0, lastIndex)]);
   }
 
   const descr = randomDescriptionList.join(' ');
@@ -124,7 +124,7 @@ const generatePhotoGallery = () => {
 };
 
 
-//Генерация объекта-точки маршрута
+// Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
   return {
     typeTripPoint: generateTripPointType(),
@@ -138,7 +138,7 @@ export const generateTripPoint = () => {
   }
 };
 
-//Генерация масива объектов-точек маршрута
+// Генерация масива объектов-точек маршрута
 export const generateMocksCollection = (generatedItemCallback) => {
   const mocksCollection = [];
   const MOCKS_COUNT = 20;

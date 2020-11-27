@@ -11,5 +11,4 @@ export const createOrdersList = (array) => {
   }
 
   return offersList;
-}
-
+};

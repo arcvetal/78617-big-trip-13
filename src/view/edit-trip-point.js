@@ -124,7 +124,6 @@ const createEventOfferTemplate = (arr) => {
   </section>`;
 };
 
-
 const createEventDestinationTemplate = (item) => {
   let imgGallery = ``;
 
