@@ -28,7 +28,7 @@ const generateDuration = () => {
   const today = dayjs();
 
   const start = today.format('DD/MM/YYYY H:m');
-  const startTime = today.format('H:m');
+  const startTime = today.format('HH:mm');
   const startDate = today.format('MMM DD');
 
   const delayDays = 7;
@@ -42,7 +42,7 @@ const generateDuration = () => {
   const finishDelay = today.add(daysShift, 'day').add(hoursShift, 'hour').add(minutesShift, 'minutes');
 
   const finish = finishDelay.format('DD/MM/YYYY H:m');
-  const finishTime = finishDelay.format('H:m');
+  const finishTime = finishDelay.format('HH:mm');
   const finishDate = finishDelay.format('MMM DD');
 
   return {
