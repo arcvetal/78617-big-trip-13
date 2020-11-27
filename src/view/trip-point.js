@@ -15,7 +15,7 @@ export const createTripPointTemplate = (tripObj) => {
         &mdash;
         <time class="event__end-time" datetime="2019-03-18T13:35">${tripObj.duration.finishTime}</time>
       </p>
-      <p class="event__duration">${tripObj.duration.hoursDiff}H 10M</p>
+      <p class="event__duration">1H 10M</p>
     </div>
     <p class="event__price">
       &euro;&nbsp;<span class="event__price-value">${tripObj.tripPrice}</span>
