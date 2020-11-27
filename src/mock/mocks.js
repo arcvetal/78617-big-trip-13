@@ -52,9 +52,8 @@ const generateDuration = () => {
     finish,
     finishTime,
     finishDate
-  }
+  };
 };
-
 
 // Генерация списка офферов
 const generateOffers = () => {
@@ -135,7 +134,7 @@ export const generateTripPoint = () => {
     photoGallery: generatePhotoGallery(),
     tripPrice: getRandomInt(50, 200),
     isFavorite: Boolean(getRandomInt(0, 1))
-  }
+  };
 };
 
 // Генерация масива объектов-точек маршрута
