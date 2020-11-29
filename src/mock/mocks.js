@@ -39,11 +39,11 @@ const generateDuration = () => {
   const hoursShift = getRandomInt(0, delayHours);
   const minutesShift = getRandomInt(0, dalayMinutes);
 
-  const finishDelay = today.add(daysShift, 'day').add(hoursShift, 'hour').add(minutesShift, 'minutes');
+  const delayDate = today.add(daysShift, 'day').add(hoursShift, 'hour').add(minutesShift, 'minutes');
 
-  const finish = finishDelay.format('DD/MM/YYYY H:m');
-  const finishTime = finishDelay.format('HH:mm');
-  const finishDate = finishDelay.format('MMM DD');
+  const finish = delayDate.format('DD/MM/YYYY H:m');
+  const finishTime = delayDate.format('HH:mm');
+  const finishDate = delayDate.format('MMM DD');
 
   return {
     start,
@@ -57,24 +57,40 @@ const generateDuration = () => {
 
 // Генерация списка офферов
 const generateOffers = () => {
-  const OFFERS_COUNT = 5;
-  const randomOffersCount = getRandomInt(0, OFFERS_COUNT);
+  const MIN_OFFERS_COUNT = 0;
+  const MAX_OFFERS_COUNT = 5;
+  const randomOffersCount = getRandomInt(MIN_OFFERS_COUNT, MAX_OFFERS_COUNT);
+
+  const MIN_PRICE = 0;
+  const MAX_PRICE = 100;
 
   const getRandomPrice = () => {
-    return getRandomInt(0, 100);
+    return getRandomInt(MIN_PRICE, 100);
   };
 
-  const offersList = [
-    {id: 'luggage', offerTitle: 'Add luggage', offerPrice: getRandomPrice()},
-    {id: 'comfort', offerTitle: 'Switch to comfort class', offerPrice: getRandomPrice()},
-    {id: 'meal', offerTitle: 'Add meal', offerPrice: getRandomPrice()},
-    {id: 'seats', offerTitle: 'Choose seats', offerPrice: getRandomPrice()},
-    {id: 'train', offerTitle: 'Travel by train', offerPrice: getRandomPrice()}
+  const offers = [
+    {id: 'luggage', offerLabel: 'Add luggage', offerPrice: getRandomPrice()},
+    {id: 'comfort', offerLabel: 'Switch to comfort class', offerPrice: getRandomPrice()},
+    {id: 'meal', offerLabel: 'Add meal', offerPrice: getRandomPrice()},
+    {id: 'seats', offerLabel: 'Choose seats', offerPrice: getRandomPrice()},
+    {id: 'train', offerLabel: 'Travel by train', offerPrice: getRandomPrice()}
   ];
 
-  offersList.length = randomOffersCount;
+  const tripOffers =  new Set(offers.id) {
+    luggage: true,
+    comfort: true
+  };
 
-  return offersList;
+
+  offers.map(offer => {
+    return `
+      ${tripOffers.has(offer.id) ? }
+    `
+  })
+
+  offers.length = randomOffersCount;
+
+  return offers;
 
 };
 
@@ -111,25 +127,25 @@ const generatePhotoGallery = () => {
   const MIN_COUNT = 1;
   const MAX_COUNT = 5;
 
-  const photoList = [];
+  const photos = [];
 
   for (let i = 0; i < MAX_COUNT; i++) {
-    photoList.push(`http://picsum.photos/248/152?r=${Math.random()}`);
+    photos.push(`http://picsum.photos/248/152?r=${Math.random()}`);
   }
 
-  photoList.length = getRandomInt(MIN_COUNT, MAX_COUNT);
+  photos.length = getRandomInt(MIN_COUNT, MAX_COUNT);
 
-  return photoList;
+  return photos;
 };
 
 
 // Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
   return {
-    typeTripPoint: generateTripPointType(),
-    city: generateCity(),
+    type: generateTripPointType(),
+    location: generateCity(),
     duration: generateDuration(),
-    offersList: generateOffers(),
+    offers: generateOffers(),
     description: generateDescription(),
     photoGallery: generatePhotoGallery(),
     tripPrice: getRandomInt(50, 200),

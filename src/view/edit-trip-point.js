@@ -3,12 +3,12 @@
 // import {createEventDestinationTemplate} from './event-destination.js';
 
 
-const createEventHeaderTemplate = (item) => {
+const createEventHeaderTemplate = item => {
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
         <span class="visually-hidden">Choose event type</span>
-        <img class="event__type-icon" width="17" height="17" src="img/icons/${item.typeTripPoint.toLowerCase()}.png" alt="Event type icon">
+        <img class="event__type-icon" width="17" height="17" src="img/icons/${item.type.toLowerCase()}.png" alt="Event type icon">
       </label>
       <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
@@ -70,7 +70,7 @@ const createEventHeaderTemplate = (item) => {
     </div>
 
     <div class="event__field-group  event__field-group--destination">
-      <label class="event__label  event__type-output" for="event-destination-1">${item.typeTripPoint}
+      <label class="event__label  event__type-output" for="event-destination-1">${item.type}
       </label>
       <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${item.city}" list="destination-list-1">
       <datalist id="destination-list-1">
@@ -108,7 +108,7 @@ const createEventOfferTemplate = (arr) => {
     list += `<div class="event__offer-selector">
               <input class="event__offer-checkbox  visually-hidden" id="event-offer-${arr[i].id}-1" type="checkbox" name="event-offer-${arr[i].id}" checked>
               <label class="event__offer-label" for="event-offer-${arr[i].id}-1">
-                <span class="event__offer-title">${arr[i].offerTitle}</span>
+                <span class="event__offer-title">${arr[i].offerLabel}</span>
                 &plus;&euro;&nbsp;
                 <span class="event__offer-price">${arr[i].offerPrice}</span>
               </label>
@@ -147,7 +147,7 @@ export const createEditTripPointTemplate = (tripObj) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       ${createEventHeaderTemplate(tripObj)}
-      ${createEventOfferTemplate(tripObj.offersList)}
+      ${createEventOfferTemplate(tripObj.offers)}
       ${createEventDestinationTemplate(tripObj)}
     </form>
   </li>`;

@@ -1,14 +1,14 @@
 
-import {createOrdersList} from './offers-list.js';
+import {createOffers} from './offers-list.js';
 
-export const createTripPointTemplate = (tripObj) => {
+export const createTripPointTemplate = tripObj => {
   return `<li class="trip-events__item">
   <div class="event">
     <time class="event__date" datetime="2019-03-18">${tripObj.duration.finishDate}</time>
     <div class="event__type">
-      <img class="event__type-icon" width="42" height="42" src="img/icons/${tripObj.typeTripPoint.toLowerCase()}.png" alt="Event type icon">
+      <img class="event__type-icon" width="42" height="42" src="img/icons/${tripObj.type.toLowerCase()}.png" alt="Event type icon">
     </div>
-    <h3 class="event__title">${tripObj.typeTripPoint} ${tripObj.city}</h3>
+    <h3 class="event__title">${tripObj.type} ${tripObj.location}</h3>
     <div class="event__schedule">
       <p class="event__time">
         <time class="event__start-time" datetime="2019-03-18T12:25">${tripObj.duration.startTime}</time>
@@ -22,7 +22,7 @@ export const createTripPointTemplate = (tripObj) => {
     </p>
     <h4 class="visually-hidden">Offers:</h4>
     <ul class="event__selected-offers">
-      ${createOrdersList(tripObj.offersList)}
+      ${createOffers(tripObj.offers)}
     </ul>
     <button class="event__favorite-btn  ${tripObj.isFavorite ? `event__favorite-btn--active` : ``}" type="button">
       <span class="visually-hidden">Add to favorite</span>
