@@ -46,8 +46,7 @@ render(tripEventsSectionElement, createTripPointsListTemplate(), 'beforeend');
 // Найдем только что добавленный <ul>
 const tripPointsListElement = document.querySelector('.trip-events__list');
 
-// Добавим форму добавления нового пункта
-render(tripPointsListElement, addNewTripPointTemplate(), 'beforeend');
+
 
 
 // Сгенерируем масив обьектов-моков
@@ -56,6 +55,11 @@ const tripPointsCollection = generateMocksCollection(generateTripPoint);
 
 // Добавим форму редактора пункта
 render(tripPointsListElement, createEditTripPointTemplate(tripPointsCollection[0]), 'afterbegin');
+
+
+// Добавим форму добавления нового пункта
+render(tripPointsListElement, addNewTripPointTemplate(tripPointsCollection[0]), 'beforeend');
+
 
 // Добавим список пунктов
 for (let i = 1; i < POINTS_COUNT; i++) {

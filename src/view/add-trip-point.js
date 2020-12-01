@@ -2,12 +2,14 @@ import {createEventHeaderTemplate} from './event-header.js';
 import {createEventOfferTemplate} from './event-offer.js';
 import {createEventDestinationTemplate} from './event-destination.js';
 
-export const addNewTripPointTemplate = () => {
+const isGalleryShown = false;
+
+export const addNewTripPointTemplate = (tripObj) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
-      ${createEventHeaderTemplate()}
-      ${createEventOfferTemplate()}
-      ${createEventDestinationTemplate(true)}
+      ${createEventHeaderTemplate(tripObj)}
+      ${createEventOfferTemplate(tripObj)}
+      ${createEventDestinationTemplate(tripObj, isGalleryShown)}
     </form>
   </li>`;
 };

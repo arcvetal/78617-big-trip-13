@@ -1,5 +1,9 @@
 import dayjs from 'dayjs';
 
+
+const typeTripPoint = ['Taxi', 'Bus', 'Train', 'Ship', 'Transport', 'Drive', 'Flight', 'Check-in', 'Sightseeing', 'Restaurant'];
+const cityList = ['Milan', 'Rome', 'Madrid', 'Barcelona', 'Berlin', 'Paris', 'Amsterdam'];
+
 const getRandomInt = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -8,8 +12,6 @@ const getRandomInt = (a = 0, b = 1) => {
 
 // Генерация рандомного типа точки маршрута
 const generateTripPointType = () => {
-  const typeTripPoint = ['Taxi', 'Bus', 'Train', 'Ship', 'Transport', 'Drive', 'Flight', 'Check-in', 'Sightseeing', 'Restaurant'];
-
   const randomIndex = getRandomInt(0, typeTripPoint.length - 1);
 
   return typeTripPoint[randomIndex];
@@ -17,8 +19,6 @@ const generateTripPointType = () => {
 
 // Герерация рандомного города из списка
 const generateCity = () => {
-  const cityList = ['Milan', 'Rome', 'Madrid', 'Barcelona', 'Berlin', 'Paris', 'Amsterdam'];
-
   const randomIndex = getRandomInt(0, cityList.length - 1);
 
   return cityList[randomIndex];
@@ -65,7 +65,7 @@ const generateOffers = () => {
   const MAX_PRICE = 100;
 
   const getRandomPrice = () => {
-    return getRandomInt(MIN_PRICE, 100);
+    return getRandomInt(MIN_PRICE, MAX_PRICE);
   };
 
   const offers = [
@@ -76,17 +76,17 @@ const generateOffers = () => {
     {id: 'train', offerLabel: 'Travel by train', offerPrice: getRandomPrice()}
   ];
 
-  const tripOffers =  new Set(offers.id) {
-    luggage: true,
-    comfort: true
-  };
+  // const tripOffers =  new Set(offers.id) {
+  //   luggage: true,
+  //   comfort: true
+  // };
 
 
-  offers.map(offer => {
-    return `
-      ${tripOffers.has(offer.id) ? }
-    `
-  })
+  // offers.map(offer => {
+  //   return `
+  //     ${tripOffers.has(offer.id) ? }
+  //   `
+  // });
 
   offers.length = randomOffersCount;
 
@@ -142,14 +142,16 @@ const generatePhotoGallery = () => {
 // Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
   return {
+    allTypes: typeTripPoint,
     type: generateTripPointType(),
+    allLocations: cityList,
     location: generateCity(),
     duration: generateDuration(),
     offers: generateOffers(),
     description: generateDescription(),
     photoGallery: generatePhotoGallery(),
     tripPrice: getRandomInt(50, 200),
-    isFavorite: Boolean(getRandomInt(0, 1))
+    isFavorite: Boolean(getRandomInt(0, 1)),
   };
 };
 
