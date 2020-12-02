@@ -1,3 +1,5 @@
+import {showDate} from '../utils/date.js';
+
 const appendTypes = (array = []) => {
   let types = ``;
 
@@ -21,7 +23,7 @@ const appendLocations = (array = []) => {
   return locations;
 };
 
-export const createEventHeaderTemplate = ({allTypes, type, allLocations, location, duration = {}, tripPrice} = {}) => {
+export const createEventHeaderTemplate = ({allTypes, type, allLocations, location, start, end, tripPrice} = {}) => {
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -49,10 +51,10 @@ export const createEventHeaderTemplate = ({allTypes, type, allLocations, locatio
 
     <div class="event__field-group  event__field-group--time">
       <label class="visually-hidden" for="event-start-time-1">From</label>
-      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${duration.start}">
+      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${showDate(start)}">
       &mdash;
       <label class="visually-hidden" for="event-end-time-1">To</label>
-      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${duration.finish}">
+      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${showDate(end)}">
     </div>
 
     <div class="event__field-group  event__field-group--price">

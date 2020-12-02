@@ -22,3 +22,7 @@ export const timeConverter = (start, end) => {
     minutes
   };
 };
+
+export const showDate = (time) => {
+  return dayjs(time).format(`YYYY-MM-DD HH:mm`);
+};
