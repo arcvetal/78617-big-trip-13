@@ -24,35 +24,20 @@ const generateCity = () => {
   return cityList[randomIndex];
 };
 
-const generateDuration = () => {
+const generateEndTime = () => {
   const today = dayjs();
 
-  const start = today.format('DD/MM/YYYY H:m');
-  const startTime = today.format('HH:mm');
-  const startDate = today.format('MMM DD');
-
-  const delayDays = 7;
-  const delayHours = 10;
+  const delayDays = 1;
+  const delayHours = 12;
   const dalayMinutes = 30;
 
   const daysShift = getRandomInt(0, delayDays);
   const hoursShift = getRandomInt(0, delayHours);
   const minutesShift = getRandomInt(0, dalayMinutes);
 
-  const delayDate = today.add(daysShift, 'day').add(hoursShift, 'hour').add(minutesShift, 'minutes');
+  const end = today.add(daysShift, 'day').add(hoursShift, 'hour').add(minutesShift, 'minutes');
 
-  const finish = delayDate.format('DD/MM/YYYY H:m');
-  const finishTime = delayDate.format('HH:mm');
-  const finishDate = delayDate.format('MMM DD');
-
-  return {
-    start,
-    startTime,
-    startDate,
-    finish,
-    finishTime,
-    finishDate
-  };
+  return end;
 };
 
 // Генерация списка офферов
@@ -141,12 +126,16 @@ const generatePhotoGallery = () => {
 
 // Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
+  const start = dayjs();
+  const end = generateEndTime();
+
   return {
     allTypes: typeTripPoint,
     type: generateTripPointType(),
     allLocations: cityList,
     location: generateCity(),
-    duration: generateDuration(),
+    start,
+    end,
     offers: generateOffers(),
     description: generateDescription(),
     photoGallery: generatePhotoGallery(),

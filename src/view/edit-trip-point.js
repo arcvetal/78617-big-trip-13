@@ -13,3 +13,5 @@ export const createEditTripPointTemplate = (tripObj) => {
     </form>
   </li>`;
 };
+
+
