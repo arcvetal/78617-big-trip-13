@@ -1,32 +1,24 @@
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+dayjs.extend(duration);
 
 export const showTime = (time) => {
-  const transformedTime = time.format('HH:mm');
-  return  transformedTime;
+  const transformedTime = time.format(`HH:mm`);
+  return transformedTime;
 };
 
 export const timeConverter = (start, end) => {
-  const durationMinutes = start.diff(end, 'minutes');
+  const durationEvent = dayjs.duration(end.diff(start)).as(`minutes`);
 
-  const timePoint = Math.abs(durationMinutes);
-
-  let minutes = timePoint;
-  let hours;
-  let days;
-
-  if (minutes > 60) {
-    hours = Math.floor(minutes / 60);
-    minutes = minutes % 60;
-  }
-
-  if (hours > 24) {
-    days = Math.floor(hours/24);
-    hours = hours % 24;
-  }
+  const days = dayjs.duration(durationEvent, `minutes`).$d.days;
+  const hours = dayjs.duration(durationEvent, `minutes`).$d.hours;
+  const minutes = dayjs.duration(durationEvent, `minutes`).$d.minutes;
 
   return {
     days,
     hours,
     minutes
-  }
+  };
 };
-

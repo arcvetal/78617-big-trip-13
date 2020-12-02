@@ -1,11 +1,11 @@
 const appendImages = (array) => {
-  let images = '';
+  let images = ``;
 
-  images += array.map(imageUrl => {
+  images += array.map((imageUrl) => {
     return `<img class="event__photo" src="${imageUrl}" alt="Event photo">`;
   });
 
-  return images
+  return images;
 };
 
 export const createEventDestinationTemplate = ({photoGallery}, isGalleryShown) => {

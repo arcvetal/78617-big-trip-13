@@ -1,7 +1,7 @@
 const appendOffers = (array) => {
-  let offers = '';
+  let offers = ``;
 
-  offers += array.map(obj => {
+  offers += array.map((obj) => {
     return `<div class="event__offer-selector">
               <input class="event__offer-checkbox  visually-hidden" id="event-offer-${obj.id}-1" type="checkbox" name="event-offer-luggage" checked>
               <label class="event__offer-label" for="event-offer-${obj.id}-1">
@@ -9,7 +9,7 @@ const appendOffers = (array) => {
                 &plus;&euro;&nbsp;
                 <span class="event__offer-price">${obj.offerPrice}</span>
               </label>
-            </div>`
+            </div>`;
   });
 
   return offers;

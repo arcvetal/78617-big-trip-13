@@ -4,7 +4,7 @@ import {createEventDestinationTemplate} from './event-destination.js';
 
 const isGalleryShown = false;
 
-export const addNewTripPointTemplate = (tripObj) => {
+export const createAddTripPointTemplate = (tripObj) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       ${createEventHeaderTemplate(tripObj)}

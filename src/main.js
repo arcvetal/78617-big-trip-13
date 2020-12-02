@@ -1,4 +1,4 @@
-import {addNewTripPointTemplate} from './view/add-trip-point.js';
+import {createAddTripPointTemplate} from './view/add-trip-point.js';
 import {createEditTripPointTemplate} from './view/edit-trip-point.js';
 import {createFiltersTemplate} from './view/filter.js';
 import {createListSortTemplate} from './view/list-sort.js';
@@ -58,11 +58,10 @@ render(tripPointsListElement, createEditTripPointTemplate(tripPointsCollection[0
 
 
 // Добавим форму добавления нового пункта
-render(tripPointsListElement, addNewTripPointTemplate(tripPointsCollection[0]), 'beforeend');
+render(tripPointsListElement, createAddTripPointTemplate(tripPointsCollection[0]), 'beforeend');
 
 
 // Добавим список пунктов
 for (let i = 1; i < POINTS_COUNT; i++) {
   render(tripPointsListElement, createTripPointTemplate(tripPointsCollection[i]), 'beforeend');
 }
-

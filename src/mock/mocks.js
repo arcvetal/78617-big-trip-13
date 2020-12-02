@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 
-
-const typeTripPoint = ['Taxi', 'Bus', 'Train', 'Ship', 'Transport', 'Drive', 'Flight', 'Check-in', 'Sightseeing', 'Restaurant'];
-const cityList = ['Milan', 'Rome', 'Madrid', 'Barcelona', 'Berlin', 'Paris', 'Amsterdam'];
+const typeTripPoint = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
+const cityList = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
 
 const getRandomInt = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -28,14 +27,14 @@ const generateEndTime = () => {
   const today = dayjs();
 
   const delayDays = 1;
-  const delayHours = 12;
+  const delayHours = 5;
   const dalayMinutes = 30;
 
   const daysShift = getRandomInt(0, delayDays);
   const hoursShift = getRandomInt(0, delayHours);
   const minutesShift = getRandomInt(0, dalayMinutes);
 
-  const end = today.add(daysShift, 'day').add(hoursShift, 'hour').add(minutesShift, 'minutes');
+  const end = today.add(daysShift, `day`).add(hoursShift, `hour`).add(minutesShift, `minutes`);
 
   return end;
 };
@@ -54,43 +53,30 @@ const generateOffers = () => {
   };
 
   const offers = [
-    {id: 'luggage', offerLabel: 'Add luggage', offerPrice: getRandomPrice()},
-    {id: 'comfort', offerLabel: 'Switch to comfort class', offerPrice: getRandomPrice()},
-    {id: 'meal', offerLabel: 'Add meal', offerPrice: getRandomPrice()},
-    {id: 'seats', offerLabel: 'Choose seats', offerPrice: getRandomPrice()},
-    {id: 'train', offerLabel: 'Travel by train', offerPrice: getRandomPrice()}
+    {id: `luggage`, offerLabel: `Add luggage`, offerPrice: getRandomPrice()},
+    {id: `comfort`, offerLabel: `Switch to comfort class`, offerPrice: getRandomPrice()},
+    {id: `meal`, offerLabel: `Add meal`, offerPrice: getRandomPrice()},
+    {id: `seats`, offerLabel: `Choose seats`, offerPrice: getRandomPrice()},
+    {id: `train`, offerLabel: `Travel by train`, offerPrice: getRandomPrice()}
   ];
-
-  // const tripOffers =  new Set(offers.id) {
-  //   luggage: true,
-  //   comfort: true
-  // };
-
-
-  // offers.map(offer => {
-  //   return `
-  //     ${tripOffers.has(offer.id) ? }
-  //   `
-  // });
 
   offers.length = randomOffersCount;
 
   return offers;
-
 };
 
 // Генерация опимания точки маршрута
 const generateDescription = () => {
   const descriptionList = [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Cras aliquet varius magna, non porta ligula feugiat eget.',
-    'Fusce tristique felis at fermentum pharetra.',
-    'Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.',
-    'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
-    'Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.',
-    'Sed sed nisi sed augue convallis suscipit in sed felis.',
-    'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.',
-    'In rutrum ac purus sit amet tempus.'
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    `Cras aliquet varius magna, non porta ligula feugiat eget.`,
+    `Fusce tristique felis at fermentum pharetra.`,
+    `Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
+    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
+    `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
+    `Sed sed nisi sed augue convallis suscipit in sed felis.`,
+    `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
+    `In rutrum ac purus sit amet tempus.`
   ];
 
   const lastIndex = descriptionList.length - 1;
@@ -102,7 +88,7 @@ const generateDescription = () => {
     randomDescriptionList.push(descriptionList[getRandomInt(0, lastIndex)]);
   }
 
-  const descr = randomDescriptionList.join(' ');
+  const descr = randomDescriptionList.join(` `);
 
   return descr;
 };

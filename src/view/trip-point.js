@@ -2,7 +2,7 @@
 import {createOffers} from './offers-list.js';
 import {showTime, timeConverter} from '../utils/date.js';
 
-export const createTripPointTemplate = tripObj => {
+export const createTripPointTemplate = (tripObj) => {
   return `<li class="trip-events__item">
   <div class="event">
     <time class="event__date" datetime="2019-03-18">18 MAR</time>
@@ -16,7 +16,7 @@ export const createTripPointTemplate = tripObj => {
         &mdash;
         <time class="event__end-time" datetime="2019-03-18T13:35">${showTime(tripObj.end)}</time>
       </p>
-      <p class="event__duration">${timeConverter(tripObj.start, tripObj.end).days !== undefined ? `${timeConverter(tripObj.start, tripObj.end).days} D` : ``}  ${timeConverter(tripObj.start, tripObj.end).hours !== undefined ? `${timeConverter(tripObj.start, tripObj.end).hours} H` : ``} ${timeConverter(tripObj.start, tripObj.end).minutes !== undefined ? `${timeConverter(tripObj.start, tripObj.end).minutes} M` : ``}</p>
+      <p class="event__duration">${timeConverter(tripObj.start, tripObj.end).days !== 0 ? `${timeConverter(tripObj.start, tripObj.end).days}D` : ``}  ${timeConverter(tripObj.start, tripObj.end).hours !== 0 ? `${timeConverter(tripObj.start, tripObj.end).hours}H` : ``} ${timeConverter(tripObj.start, tripObj.end).minutes !== 0 ? `${timeConverter(tripObj.start, tripObj.end).minutes}M` : ``}</p>
     </div>
     <p class="event__price">
       &euro;&nbsp;<span class="event__price-value">${tripObj.tripPrice}</span>
