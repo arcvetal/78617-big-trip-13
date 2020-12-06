@@ -1,29 +1,22 @@
 import {showDate} from '../utils/date.js';
 
-const appendTypes = (array = []) => {
-  let types = ``;
+const renderTypes = (types = []) => {
 
-  types += array.map((type) => {
+  return types.map((type) => {
     return `<div class="event__type-item">
     <input id="event-type-${type.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${type.toLowerCase()}">
     <label class="event__type-label  event__type-label--${type.toLowerCase()}" for="event-type-${type.toLowerCase()}-1">${type}</label>
   </div>`;
-  });
-
-  return types;
+  }).join(``);
 };
 
-const appendLocations = (array = []) => {
-  let locations = ``;
-
-  locations += array.map((location) => {
+const renderLocations = (locations = []) => {
+  return locations.map((location) => {
     return `<option value="${location}"></option>`;
-  });
-
-  return locations;
+  }).join(``);
 };
 
-export const createEventHeaderTemplate = ({allTypes, type, allLocations, location, start, end, tripPrice} = {}) => {
+export const createEventHeaderTemplate = ({type, location, start, end, tripPrice} = {}, {allTypes, allLocations} = {}) => {
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -35,7 +28,7 @@ export const createEventHeaderTemplate = ({allTypes, type, allLocations, locatio
       <div class="event__type-list">
         <fieldset class="event__type-group">
           <legend class="visually-hidden">Event type</legend>
-          ${appendTypes(allTypes)}
+          ${renderTypes(allTypes)}
         </fieldset>
       </div>
     </div>
@@ -45,7 +38,7 @@ export const createEventHeaderTemplate = ({allTypes, type, allLocations, locatio
       </label>
       <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${location}" list="destination-list-1">
       <datalist id="destination-list-1">
-        ${appendLocations(allLocations)}
+        ${renderLocations(allLocations)}
       </datalist>
     </div>
 

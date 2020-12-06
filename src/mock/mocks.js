@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-const typeTripPoint = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
-const cityList = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
+const MIN_PRICE = 10;
+const MAX_PRICE = 100;
 
 const getRandomInt = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -9,18 +9,35 @@ const getRandomInt = (a = 0, b = 1) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
+const getRandomPrice = () => {
+  return getRandomInt(MIN_PRICE, MAX_PRICE);
+};
+
+const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
+const locations = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
+
+let allAvailableOffers = [
+  {id: `luggage`, offerLabel: `Add luggage`, offerPrice: getRandomPrice()},
+  {id: `comfort`, offerLabel: `Switch to comfort class`, offerPrice: getRandomPrice()},
+  {id: `meal`, offerLabel: `Add meal`, offerPrice: getRandomPrice()},
+  {id: `seats`, offerLabel: `Choose seats`, offerPrice: getRandomPrice()},
+  {id: `train`, offerLabel: `Travel by train`, offerPrice: getRandomPrice()}
+];
+
+
+
 // Генерация рандомного типа точки маршрута
 const generateTripPointType = () => {
-  const randomIndex = getRandomInt(0, typeTripPoint.length - 1);
+  const randomIndex = getRandomInt(0, tripPointTypes.length - 1);
 
-  return typeTripPoint[randomIndex];
+  return tripPointTypes[randomIndex];
 };
 
 // Герерация рандомного города из списка
 const generateCity = () => {
-  const randomIndex = getRandomInt(0, cityList.length - 1);
+  const randomIndex = getRandomInt(0, locations.length - 1);
 
-  return cityList[randomIndex];
+  return locations[randomIndex];
 };
 
 const generateEndTime = () => {
@@ -45,20 +62,7 @@ const generateOffers = () => {
   const MAX_OFFERS_COUNT = 5;
   const randomOffersCount = getRandomInt(MIN_OFFERS_COUNT, MAX_OFFERS_COUNT);
 
-  const MIN_PRICE = 0;
-  const MAX_PRICE = 100;
-
-  const getRandomPrice = () => {
-    return getRandomInt(MIN_PRICE, MAX_PRICE);
-  };
-
-  const offers = [
-    {id: `luggage`, offerLabel: `Add luggage`, offerPrice: getRandomPrice()},
-    {id: `comfort`, offerLabel: `Switch to comfort class`, offerPrice: getRandomPrice()},
-    {id: `meal`, offerLabel: `Add meal`, offerPrice: getRandomPrice()},
-    {id: `seats`, offerLabel: `Choose seats`, offerPrice: getRandomPrice()},
-    {id: `train`, offerLabel: `Travel by train`, offerPrice: getRandomPrice()}
-  ];
+  const offers = Array.from(allAvailableOffers);
 
   offers.length = randomOffersCount;
 
@@ -109,6 +113,10 @@ const generatePhotoGallery = () => {
   return photos;
 };
 
+export const allOffers = () => {
+  return allAvailableOffers;
+};
+
 
 // Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
@@ -116,9 +124,7 @@ export const generateTripPoint = () => {
   const end = generateEndTime();
 
   return {
-    allTypes: typeTripPoint,
     type: generateTripPointType(),
-    allLocations: cityList,
     location: generateCity(),
     start,
     end,
@@ -129,6 +135,14 @@ export const generateTripPoint = () => {
     isFavorite: Boolean(getRandomInt(0, 1)),
   };
 };
+
+export const allTypesAndLocations = () => {
+  return {
+    allTypes: tripPointTypes,
+    allLocations: locations
+  }
+};
+
 
 // Генерация масива объектов-точек маршрута
 export const generateMocksCollection = (generatedItemCallback) => {
