@@ -16,13 +16,18 @@ const getRandomPrice = () => {
 const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
 const locations = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
 
-let allAvailableOffers = [
-  {id: `luggage`, offerLabel: `Add luggage`, offerPrice: getRandomPrice()},
-  {id: `comfort`, offerLabel: `Switch to comfort class`, offerPrice: getRandomPrice()},
-  {id: `meal`, offerLabel: `Add meal`, offerPrice: getRandomPrice()},
-  {id: `seats`, offerLabel: `Choose seats`, offerPrice: getRandomPrice()},
-  {id: `train`, offerLabel: `Travel by train`, offerPrice: getRandomPrice()}
+const allAvailableOffers = [
+  {type: `luggage`, label: `Add luggage`, price: getRandomPrice()},
+  {type: `comfort`, label: `Switch to comfort class`, price: getRandomPrice()},
+  {type: `meal`, label: `Add meal`, price: getRandomPrice()},
+  {type: `seats`, label: `Choose seats`, price: getRandomPrice()},
+  {type: `train`, label: `Travel by train`, price: getRandomPrice()}
 ];
+
+const offersTypes = [];
+for (const item of allAvailableOffers) {
+  offersTypes.push(item.type);
+};
 
 
 
@@ -129,6 +134,7 @@ export const generateTripPoint = () => {
     start,
     end,
     offers: generateOffers(),
+    offersTypes,
     description: generateDescription(),
     photoGallery: generatePhotoGallery(),
     tripPrice: getRandomInt(50, 200),

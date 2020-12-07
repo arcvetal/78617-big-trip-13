@@ -9,7 +9,7 @@ export const showTime = (time) => {
   return transformedTime;
 };
 
-export const timeConverter = (start, end) => {
+export const convertTime = (start, end) => {
   const durationEvent = dayjs.duration(end.diff(start)).as(`minutes`);
 
   const days = dayjs.duration(durationEvent, `minutes`).$d.days;

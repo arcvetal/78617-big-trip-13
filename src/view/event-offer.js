@@ -1,11 +1,11 @@
-const appendOffers = (offers) => {
+const renderOffers = (offers) => {
   return offers.map((offer) => {
     return `<div class="event__offer-selector">
-              <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.id}-1" type="checkbox" name="event-offer-luggage" checked>
-              <label class="event__offer-label" for="event-offer-${offer.id}-1">
-                <span class="event__offer-title">${offer.offerLabel}</span>
+              <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.type}-1" type="checkbox" name="event-offer-luggage" checked>
+              <label class="event__offer-label" for="event-offer-${offer.type}-1">
+                <span class="event__offer-title">${offer.label}</span>
                 &plus;&euro;&nbsp;
-                <span class="event__offer-price">${offer.offerPrice}</span>
+                <span class="event__offer-price">${offer.price}</span>
               </label>
             </div>`;
   }).join(``);
@@ -17,7 +17,7 @@ export const createEventOfferTemplate = (offers) => {
 
     <div class="event__available-offers">
 
-    ${appendOffers(offers)}
+    ${renderOffers(offers)}
 
     </div>
   </section>`;
