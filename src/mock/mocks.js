@@ -27,9 +27,7 @@ const allAvailableOffers = [
 const offersTypes = [];
 for (const item of allAvailableOffers) {
   offersTypes.push(item.type);
-};
-
-
+}
 
 // Генерация рандомного типа точки маршрута
 const generateTripPointType = () => {
@@ -146,7 +144,7 @@ export const allTypesAndLocations = () => {
   return {
     allTypes: tripPointTypes,
     allLocations: locations
-  }
+  };
 };
 
 

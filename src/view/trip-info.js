@@ -21,11 +21,11 @@ export default class TripInfo {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }
-    
+
     return this._element;
   }
 
   removeElement() {
     this._element = null;
   }
-};
+}

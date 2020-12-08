@@ -61,4 +61,4 @@ export default class TripPoint {
   removeElement() {
     this._element = null;
   }
-};
+}

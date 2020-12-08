@@ -27,4 +27,4 @@ export default class TripMenu {
   removeElement() {
     this._element = null;
   }
-};
+}

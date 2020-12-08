@@ -49,4 +49,4 @@ export default class ListSort {
   removeElement() {
     this._element = null;
   }
-};
+}

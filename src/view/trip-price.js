@@ -27,4 +27,4 @@ export default class TripPrice {
   removeElement() {
     this._element = null;
   }
-};
+}

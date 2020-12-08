@@ -24,4 +24,4 @@ export default class TripPointsList {
   removeElement() {
     this._element = null;
   }
-};
+}

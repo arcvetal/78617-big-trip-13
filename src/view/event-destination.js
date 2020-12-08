@@ -2,8 +2,8 @@ const renderImages = (images) => {
   return `<div class="event__photos-container">
             <div class="event__photos-tape">
               ${images.map((imageUrl) => {
-                return `<img class="event__photo" src="${imageUrl}" alt="Event photo">`;
-              }).join('')}
+    return `<img class="event__photo" src="${imageUrl}" alt="Event photo">`;
+  }).join(``)}
             </div>
           </div>`;
 };

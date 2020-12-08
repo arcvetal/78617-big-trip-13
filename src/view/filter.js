@@ -41,4 +41,4 @@ export default class Filters {
   removeElement() {
     this._element = null;
   }
-};
+}
