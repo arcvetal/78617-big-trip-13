@@ -1,8 +1,9 @@
+import {createElement} from '../utils/utils.js';
 
 import {createOffersListTemplate} from './offers-list.js';
 import {showTime, convertTime} from '../utils/date.js';
 
-export const createTripPointTemplate = ({type, location, start, end, tripPrice, offers, isFavorite}) => {
+const createTripPointTemplate = ({type, location, start, end, tripPrice, offers, isFavorite}) => {
   return `<li class="trip-events__item">
   <div class="event">
     <time class="event__date" datetime="2019-03-18">18 MAR</time>
@@ -37,4 +38,27 @@ export const createTripPointTemplate = ({type, location, start, end, tripPrice, 
     </button>
   </div>
 </li>`;
+};
+
+export default class TripPoint {
+  constructor(tripObj) {
+    this._tripObj = tripObj;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripPointTemplate(this._tripObj);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
 };
