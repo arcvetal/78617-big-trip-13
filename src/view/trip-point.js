@@ -41,13 +41,13 @@ const createTripPointTemplate = ({type, location, start, end, tripPrice, offers,
 };
 
 export default class TripPoint {
-  constructor(tripObj) {
-    this._tripObj = tripObj;
+  constructor(tripItem) {
+    this._tripItem = tripItem;
     this._element = null;
   }
 
   getTemplate() {
-    return createTripPointTemplate(this._tripObj);
+    return createTripPointTemplate(this._tripItem);
   }
 
   getElement() {

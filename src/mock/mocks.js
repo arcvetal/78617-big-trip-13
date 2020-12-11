@@ -13,10 +13,12 @@ const getRandomPrice = () => {
   return getRandomInt(MIN_PRICE, MAX_PRICE);
 };
 
-const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
-const locations = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
+export const RANDOM_TOTAL_PRICE = 1300;
 
-const allAvailableOffers = [
+export const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
+export const locations = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
+
+export const offers = [
   {type: `luggage`, label: `Add luggage`, price: getRandomPrice()},
   {type: `comfort`, label: `Switch to comfort class`, price: getRandomPrice()},
   {type: `meal`, label: `Add meal`, price: getRandomPrice()},
@@ -25,7 +27,7 @@ const allAvailableOffers = [
 ];
 
 const offersTypes = [];
-for (const item of allAvailableOffers) {
+for (const item of offers) {
   offersTypes.push(item.type);
 }
 
@@ -60,16 +62,16 @@ const generateEndTime = () => {
 };
 
 // Генерация списка офферов
-const generateOffers = () => {
+const generateRandomOffers = () => {
   const MIN_OFFERS_COUNT = 0;
   const MAX_OFFERS_COUNT = 5;
   const randomOffersCount = getRandomInt(MIN_OFFERS_COUNT, MAX_OFFERS_COUNT);
 
-  const offers = Array.from(allAvailableOffers);
+  const randomOffers = Array.from(offers);
 
-  offers.length = randomOffersCount;
+  randomOffers.length = randomOffersCount;
 
-  return offers;
+  return randomOffers;
 };
 
 // Генерация опимания точки маршрута
@@ -116,9 +118,9 @@ const generatePhotoGallery = () => {
   return photos;
 };
 
-export const allOffers = () => {
-  return allAvailableOffers;
-};
+// export const allOffers = () => {
+//   return offers;
+// };
 
 
 // Генерация объекта-точки маршрута
@@ -131,19 +133,12 @@ export const generateTripPoint = () => {
     location: generateCity(),
     start,
     end,
-    offers: generateOffers(),
+    offers: generateRandomOffers(),
     offersTypes,
     description: generateDescription(),
     photoGallery: generatePhotoGallery(),
     tripPrice: getRandomInt(50, 200),
     isFavorite: Boolean(getRandomInt(0, 1)),
-  };
-};
-
-export const allTypesAndLocations = () => {
-  return {
-    allTypes: tripPointTypes,
-    allLocations: locations
   };
 };
 

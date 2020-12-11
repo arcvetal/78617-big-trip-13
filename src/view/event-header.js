@@ -16,7 +16,7 @@ const renderLocations = (locations = []) => {
   }).join(``);
 };
 
-export const createEventHeaderTemplate = ({type, location, start, end, tripPrice} = {}, {allTypes, allLocations} = {}) => {
+export const createEventHeaderTemplate = ({type, location, start, end, tripPrice} = {}, tripPointTypes, locations) => {
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -28,7 +28,7 @@ export const createEventHeaderTemplate = ({type, location, start, end, tripPrice
       <div class="event__type-list">
         <fieldset class="event__type-group">
           <legend class="visually-hidden">Event type</legend>
-          ${renderTypes(allTypes)}
+          ${renderTypes(tripPointTypes)}
         </fieldset>
       </div>
     </div>
@@ -38,7 +38,7 @@ export const createEventHeaderTemplate = ({type, location, start, end, tripPrice
       </label>
       <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${location}" list="destination-list-1">
       <datalist id="destination-list-1">
-        ${renderLocations(allLocations)}
+        ${renderLocations(locations)}
       </datalist>
     </div>
 

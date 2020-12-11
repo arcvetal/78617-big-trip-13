@@ -4,26 +4,27 @@ import {createEventDestinationTemplate} from './event-destination.js';
 import {createElement} from '../utils/utils.js';
 
 
-const createEditTripPointTemplate = (tripObj, locationsAndTypes, allOffers) => {
+const createEditTripPointTemplate = (tripItem, tripPointTypes, locations, offers) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
-      ${createEventHeaderTemplate(tripObj, locationsAndTypes)}
-      ${createEventOfferTemplate(allOffers)}
-      ${createEventDestinationTemplate(tripObj)}
+      ${createEventHeaderTemplate(tripItem, tripPointTypes, locations)}
+      ${createEventOfferTemplate(offers)}
+      ${createEventDestinationTemplate(tripItem)}
     </form>
   </li>`;
 };
 
 export default class EditTripPoint {
-  constructor(tripObj, locationsAndTypes, allOffers) {
-    this._tripObj = tripObj;
-    this._locationsAndTypes = locationsAndTypes;
-    this._allOffers = allOffers;
+  constructor(tripItem, tripPointTypes, locations, offers) {
+    this._tripItem = tripItem;
+    this._tripPointTypes = tripPointTypes;
+    this.locations = locations;
+    this._offers = offers;
     this._element = null;
   }
 
   getTemplate() {
-    return createEditTripPointTemplate(this._tripObj, this._locationsAndTypes, this._allOffers);
+    return createEditTripPointTemplate(this._tripItem, this._tripPointTypes, this.locations, this._offers);
   }
 
   getElement() {
