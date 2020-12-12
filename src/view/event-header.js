@@ -1,4 +1,5 @@
 import {showDate} from '../utils/date.js';
+import { createElement } from '../utils/utils.js';
 
 const renderTypes = (types = []) => {
 
@@ -16,7 +17,7 @@ const renderLocations = (locations = []) => {
   }).join(``);
 };
 
-export const createEventHeaderTemplate = ({type, location, start, end, tripPrice} = {}, tripPointTypes, locations) => {
+const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPointTypes, locations) => {
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -62,3 +63,32 @@ export const createEventHeaderTemplate = ({type, location, start, end, tripPrice
     <button class="event__reset-btn" type="reset">Cancel</button>
   </header>`;
 };
+
+export default class EventHeader {
+  constructor({type, location, start, end, tripPrice} = {}, tripPointTypes, locations) {
+    this._type = type;
+    this._location = location;
+    this._start = start;
+    this._end = end;
+    this._tripPrice = tripPrice;
+    this._tripPointTypes = tripPointTypes;
+    this._locations = locations;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createEventHeaderTemplate(this._type, this._location, this._start, this._end, this._tripPrice, this._tripPointTypes, this._locations);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
