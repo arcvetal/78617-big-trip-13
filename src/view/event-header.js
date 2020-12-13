@@ -17,7 +17,21 @@ const renderLocations = (locations = []) => {
   }).join(``);
 };
 
-const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPointTypes, locations) => {
+const generateButtonsBlock = (isEdit) => {
+  if (isEdit) {
+    return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
+      <button class="event__reset-btn" type="reset">Delete</button>
+      <button class="event__rollup-btn" type="button">
+        <span class="visually-hidden">Open event</span>
+      </button>`;
+  } else {
+    return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</  button>
+    <button class="event__reset-btn" type="reset">Cancel</button>`;
+  }
+};
+
+const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPointTypes, locations, isEditForm) => {
+
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -58,14 +72,12 @@ const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPo
       </label>
       <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="">
     </div>
-
-    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-    <button class="event__reset-btn" type="reset">Cancel</button>
+    ${generateButtonsBlock(isEditForm)}
   </header>`;
 };
 
 export default class EventHeader {
-  constructor({type, location, start, end, tripPrice} = {}, tripPointTypes, locations) {
+  constructor({type, location, start, end, tripPrice} = {}, tripPointTypes, locations, isEditForm) {
     this._type = type;
     this._location = location;
     this._start = start;
@@ -73,11 +85,12 @@ export default class EventHeader {
     this._tripPrice = tripPrice;
     this._tripPointTypes = tripPointTypes;
     this._locations = locations;
+    this._isEditForm = isEditForm;
     this._element = null;
   }
 
   getTemplate() {
-    return createEventHeaderTemplate(this._type, this._location, this._start, this._end, this._tripPrice, this._tripPointTypes, this._locations);
+    return createEventHeaderTemplate(this._type, this._location, this._start, this._end, this._tripPrice, this._tripPointTypes, this._locations, this._isEditForm);
   }
 
   getElement() {

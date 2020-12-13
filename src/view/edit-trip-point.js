@@ -3,11 +3,12 @@ import EventOfferView from './event-offer.js';
 import EventDestinationView from './event-destination.js';
 import {createElement} from '../utils/utils.js';
 
+const IS_EDIT = true;
 
 const createEditTripPointTemplate = (tripItem, tripPointTypes, locations, offers) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
-      ${new EventHeaderView(tripItem, tripPointTypes, locations).getTemplate()}
+      ${new EventHeaderView(tripItem, tripPointTypes, locations, IS_EDIT).getTemplate()}
       ${new EventOfferView(offers).getTemplate()}
       ${new EventDestinationView(tripItem).getTemplate()}
     </form>

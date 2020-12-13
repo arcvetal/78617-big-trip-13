@@ -74,7 +74,7 @@ const generateRandomOffers = () => {
   return randomOffers;
 };
 
-// Генерация опимания точки маршрута
+// Генерация опиcания точки маршрута
 const generateDescription = () => {
   const descriptionList = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -118,11 +118,6 @@ const generatePhotoGallery = () => {
   return photos;
 };
 
-// export const allOffers = () => {
-//   return offers;
-// };
-
-
 // Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
   const start = dayjs();
@@ -146,7 +141,7 @@ export const generateTripPoint = () => {
 // Генерация масива объектов-точек маршрута
 export const generateMocksCollection = (generatedItemCallback) => {
   const mocksCollection = [];
-  const MOCKS_COUNT = 20;
+  const MOCKS_COUNT = 10;
 
   for (let i = 0; i < MOCKS_COUNT; i++) {
     mocksCollection.push(generatedItemCallback());
