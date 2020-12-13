@@ -1,9 +1,10 @@
 import {createElement} from '../utils/utils.js';
-
-import {createOffersListTemplate} from './offers-list.js';
-import {showTime, convertTime} from '../utils/date.js';
+import OffersListView from './offers-list.js';
+import {showTime, getDateDiffDuration} from '../utils/date.js';
 
 const createTripPointTemplate = ({type, location, start, end, tripPrice, offers, isFavorite}) => {
+  const tripPointTime = getDateDiffDuration(start, end);
+
   return `<li class="trip-events__item">
   <div class="event">
     <time class="event__date" datetime="2019-03-18">18 MAR</time>
@@ -17,14 +18,14 @@ const createTripPointTemplate = ({type, location, start, end, tripPrice, offers,
         &mdash;
         <time class="event__end-time" datetime="2019-03-18T13:35">${showTime(end)}</time>
       </p>
-      <p class="event__duration">${convertTime(start, end).days !== 0 ? `${convertTime(start, end).days}D` : ``}  ${convertTime(start, end).hours !== 0 ? `${convertTime(start, end).hours}H` : ``} ${convertTime(start, end).minutes !== 0 ? `${convertTime(start, end).minutes}M` : ``}</p>
+      <p class="event__duration">${tripPointTime.days !== 0 ? `${tripPointTime.days}D` : ``}  ${tripPointTime.hours !== 0 ? `${tripPointTime.hours}H` : ``} ${tripPointTime.minutes !== 0 ? `${tripPointTime.minutes}M` : ``}</p>
     </div>
     <p class="event__price">
       &euro;&nbsp;<span class="event__price-value">${tripPrice}</span>
     </p>
     <h4 class="visually-hidden">Offers:</h4>
     <ul class="event__selected-offers">
-      ${createOffersListTemplate(offers)}
+      ${new OffersListView(offers).getTemplate()}
     </ul>
     <button class="event__favorite-btn  ${isFavorite ? `event__favorite-btn--active` : ``}" type="button">
       <span class="visually-hidden">Add to favorite</span>

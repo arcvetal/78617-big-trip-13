@@ -18,6 +18,9 @@ const tripControlsMenu = tripControls.querySelector('h2:first-of-type');
 const tripEventsTitleElement = document.querySelector('.trip-events h2');
 const tripEventsSectionElement = document.querySelector('.trip-events');
 
+// Сгенерируем масив обьектов-моков
+const tripPointsCollection = generateMocksCollection(generateTripPoint);
+
 // Функция отрисовки точки маршрута
 const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers) => {
   const tripPointComponent = new TripPointView(tripPoint);
@@ -44,7 +47,7 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
 }
 
 // Добавмим информацию о маршруте
-renderElement(tripMainElement, new TripInfoView().getElement(), RenderPosition.AFTERBEGIN);
+renderElement(tripMainElement, new TripInfoView(locations).getElement(), RenderPosition.AFTERBEGIN);
 
 // Добавим стоимость поездки
 renderElement(tripMainElement, new TripPriceView(RANDOM_TOTAL_PRICE).getElement(), RenderPosition.BEFOREEND);
@@ -63,9 +66,6 @@ renderElement(tripEventsTitleElement, new ListSortView().getElement(), RenderPos
 
 // Добавим <ul> для будущего списка пунктов
 renderElement(tripEventsSectionElement, tripPointsListElement, RenderPosition.BEFOREEND);
-
-// Сгенерируем масив обьектов-моков
-const tripPointsCollection = generateMocksCollection(generateTripPoint);
 
 for (const Item of tripPointsCollection) {
   renderTripPoint(tripPointsListElement, Item, tripPointTypes, locations, offers);

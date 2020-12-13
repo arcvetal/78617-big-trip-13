@@ -1,5 +1,5 @@
-import {showDate} from '../utils/date.js';
-import { createElement } from '../utils/utils.js';
+import {formatDate} from '../utils/date.js';
+import {createElement} from '../utils/utils.js';
 
 const renderTypes = (types = []) => {
 
@@ -45,10 +45,10 @@ const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPo
 
     <div class="event__field-group  event__field-group--time">
       <label class="visually-hidden" for="event-start-time-1">From</label>
-      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${showDate(start)}">
+      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${formatDate(start, `YYYY-MM-DD HH:mm`)}">
       &mdash;
       <label class="visually-hidden" for="event-end-time-1">To</label>
-      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${showDate(end)}">
+      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${formatDate(end, `YYYY-MM-DD HH:mm`)}">
     </div>
 
     <div class="event__field-group  event__field-group--price">

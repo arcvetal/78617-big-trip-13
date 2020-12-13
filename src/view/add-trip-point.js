@@ -1,15 +1,15 @@
-import {createEventHeaderTemplate} from './event-header.js';
-import {createEventOfferTemplate} from './event-offer.js';
-import {createEventDestinationTemplate} from './event-destination.js';
+import EventHeaderView from './event-header.js';
+import EventOfferView from './event-offer.js';
+import EventDestinationView from './event-destination.js';
 import {createElement} from '../utils/utils.js';
 
 
 const createAddTripPointTemplate = (tripItem, tripPointTypes, locations, offers) => {
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
-      ${createEventHeaderTemplate(tripItem, tripPointTypes, locations)}
-      ${createEventOfferTemplate(offers)}
-      ${createEventDestinationTemplate()}
+      ${new EventHeaderView(tripItem, tripPointTypes, locations).getTemplate()}
+      ${new EventOfferView(offers).getTemplate()}
+      ${new EventDestinationView().getTemplate()}
     </form>
   </li>`;
 };

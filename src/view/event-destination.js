@@ -1,4 +1,4 @@
-import { createElement } from "../utils/utils";
+import {createElement} from "../utils/utils";
 
 const renderImages = (images = []) => {
   return `<div class="event__photos-container">
