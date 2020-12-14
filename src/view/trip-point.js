@@ -4,6 +4,7 @@ import {showTime, getDateDiffDuration} from '../utils/date.js';
 
 const createTripPointTemplate = ({type, location, start, end, tripPrice, offers, isFavorite}) => {
   const tripPointTime = getDateDiffDuration(start, end);
+  const {days, hours, minutes} = tripPointTime;
 
   return `<li class="trip-events__item">
   <div class="event">
@@ -18,7 +19,7 @@ const createTripPointTemplate = ({type, location, start, end, tripPrice, offers,
         &mdash;
         <time class="event__end-time" datetime="2019-03-18T13:35">${showTime(end)}</time>
       </p>
-      <p class="event__duration">${tripPointTime.days !== 0 ? `${tripPointTime.days}D` : ``}  ${tripPointTime.hours !== 0 ? `${tripPointTime.hours}H` : ``} ${tripPointTime.minutes !== 0 ? `${tripPointTime.minutes}M` : ``}</p>
+      <p class="event__duration">${days !== 0 ? `${days}D` : ``}  ${hours !== 0 ? `${hours}H` : ``} ${minutes !== 0 ? `${minutes}M` : ``}</p>
     </div>
     <p class="event__price">
       &euro;&nbsp;<span class="event__price-value">${tripPrice}</span>

@@ -13,6 +13,7 @@ const getRandomPrice = () => {
   return getRandomInt(MIN_PRICE, MAX_PRICE);
 };
 
+export const emptyListTemplate = `<p class="trip-events__msg">Click New Event to create your first point</p>`;
 export const RANDOM_TOTAL_PRICE = 1300;
 
 export const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
@@ -141,7 +142,7 @@ export const generateTripPoint = () => {
 // Генерация масива объектов-точек маршрута
 export const generateMocksCollection = (generatedItemCallback) => {
   const mocksCollection = [];
-  const MOCKS_COUNT = 10;
+  const MOCKS_COUNT = 12;
 
   for (let i = 0; i < MOCKS_COUNT; i++) {
     mocksCollection.push(generatedItemCallback());
