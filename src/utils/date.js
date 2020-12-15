@@ -9,7 +9,7 @@ export const showTime = (time) => {
   return transformedTime;
 };
 
-export const timeConverter = (start, end) => {
+export const getDateDiffDuration = (start, end) => {
   const durationEvent = dayjs.duration(end.diff(start)).as(`minutes`);
 
   const days = dayjs.duration(durationEvent, `minutes`).$d.days;
@@ -23,6 +23,7 @@ export const timeConverter = (start, end) => {
   };
 };
 
-export const showDate = (time) => {
-  return dayjs(time).format(`YYYY-MM-DD HH:mm`);
+export const formatDate = (time, format) => {
+  return dayjs(time).format(format);
 };
+

@@ -1,29 +1,37 @@
-import {showDate} from '../utils/date.js';
+import {formatDate} from '../utils/date.js';
+import {createElement} from '../utils/utils.js';
 
-const appendTypes = (array = []) => {
-  let types = ``;
+const renderTypes = (types = []) => {
 
-  types += array.map((type) => {
+  return types.map((type) => {
     return `<div class="event__type-item">
     <input id="event-type-${type.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${type.toLowerCase()}">
     <label class="event__type-label  event__type-label--${type.toLowerCase()}" for="event-type-${type.toLowerCase()}-1">${type}</label>
   </div>`;
-  });
-
-  return types;
+  }).join(``);
 };
 
-const appendLocations = (array = []) => {
-  let locations = ``;
-
-  locations += array.map((location) => {
+const renderLocations = (locations = []) => {
+  return locations.map((location) => {
     return `<option value="${location}"></option>`;
-  });
-
-  return locations;
+  }).join(``);
 };
 
-export const createEventHeaderTemplate = ({allTypes, type, allLocations, location, start, end, tripPrice} = {}) => {
+const generateButtonsBlock = (isEdit) => {
+  if (isEdit) {
+    return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
+      <button class="event__reset-btn" type="reset">Delete</button>
+      <button class="event__rollup-btn" type="button">
+        <span class="visually-hidden">Open event</span>
+      </button>`;
+  } else {
+    return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</  button>
+    <button class="event__reset-btn" type="reset">Cancel</button>`;
+  }
+};
+
+const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPointTypes, locations, isEditForm) => {
+
   return `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -35,7 +43,7 @@ export const createEventHeaderTemplate = ({allTypes, type, allLocations, locatio
       <div class="event__type-list">
         <fieldset class="event__type-group">
           <legend class="visually-hidden">Event type</legend>
-          ${appendTypes(allTypes)}
+          ${renderTypes(tripPointTypes)}
         </fieldset>
       </div>
     </div>
@@ -45,16 +53,16 @@ export const createEventHeaderTemplate = ({allTypes, type, allLocations, locatio
       </label>
       <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${location}" list="destination-list-1">
       <datalist id="destination-list-1">
-        ${appendLocations(allLocations)}
+        ${renderLocations(locations)}
       </datalist>
     </div>
 
     <div class="event__field-group  event__field-group--time">
       <label class="visually-hidden" for="event-start-time-1">From</label>
-      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${showDate(start)}">
+      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${formatDate(start, `YYYY-MM-DD HH:mm`)}">
       &mdash;
       <label class="visually-hidden" for="event-end-time-1">To</label>
-      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${showDate(end)}">
+      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${formatDate(end, `YYYY-MM-DD HH:mm`)}">
     </div>
 
     <div class="event__field-group  event__field-group--price">
@@ -64,8 +72,36 @@ export const createEventHeaderTemplate = ({allTypes, type, allLocations, locatio
       </label>
       <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="">
     </div>
-
-    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-    <button class="event__reset-btn" type="reset">Cancel</button>
+    ${generateButtonsBlock(isEditForm)}
   </header>`;
 };
+
+export default class EventHeader {
+  constructor({type, location, start, end, tripPrice} = {}, tripPointTypes, locations, isEditForm) {
+    this._type = type;
+    this._location = location;
+    this._start = start;
+    this._end = end;
+    this._tripPrice = tripPrice;
+    this._tripPointTypes = tripPointTypes;
+    this._locations = locations;
+    this._isEditForm = isEditForm;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createEventHeaderTemplate(this._type, this._location, this._start, this._end, this._tripPrice, this._tripPointTypes, this._locations, this._isEditForm);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

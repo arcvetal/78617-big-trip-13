@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-const typeTripPoint = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
-const cityList = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
+const MIN_PRICE = 10;
+const MAX_PRICE = 100;
 
 const getRandomInt = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -9,18 +9,41 @@ const getRandomInt = (a = 0, b = 1) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
+const getRandomPrice = () => {
+  return getRandomInt(MIN_PRICE, MAX_PRICE);
+};
+
+export const emptyListTemplate = `<p class="trip-events__msg">Click New Event to create your first point</p>`;
+export const RANDOM_TOTAL_PRICE = 1300;
+
+export const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
+export const locations = [`Milan`, `Rome`, `Madrid`, `Barcelona`, `Berlin`, `Paris`, `Amsterdam`];
+
+export const offers = [
+  {type: `luggage`, label: `Add luggage`, price: getRandomPrice()},
+  {type: `comfort`, label: `Switch to comfort class`, price: getRandomPrice()},
+  {type: `meal`, label: `Add meal`, price: getRandomPrice()},
+  {type: `seats`, label: `Choose seats`, price: getRandomPrice()},
+  {type: `train`, label: `Travel by train`, price: getRandomPrice()}
+];
+
+const offersTypes = [];
+for (const item of offers) {
+  offersTypes.push(item.type);
+}
+
 // Генерация рандомного типа точки маршрута
 const generateTripPointType = () => {
-  const randomIndex = getRandomInt(0, typeTripPoint.length - 1);
+  const randomIndex = getRandomInt(0, tripPointTypes.length - 1);
 
-  return typeTripPoint[randomIndex];
+  return tripPointTypes[randomIndex];
 };
 
 // Герерация рандомного города из списка
 const generateCity = () => {
-  const randomIndex = getRandomInt(0, cityList.length - 1);
+  const randomIndex = getRandomInt(0, locations.length - 1);
 
-  return cityList[randomIndex];
+  return locations[randomIndex];
 };
 
 const generateEndTime = () => {
@@ -40,32 +63,19 @@ const generateEndTime = () => {
 };
 
 // Генерация списка офферов
-const generateOffers = () => {
+const generateRandomOffers = () => {
   const MIN_OFFERS_COUNT = 0;
   const MAX_OFFERS_COUNT = 5;
   const randomOffersCount = getRandomInt(MIN_OFFERS_COUNT, MAX_OFFERS_COUNT);
 
-  const MIN_PRICE = 0;
-  const MAX_PRICE = 100;
+  const randomOffers = Array.from(offers);
 
-  const getRandomPrice = () => {
-    return getRandomInt(MIN_PRICE, MAX_PRICE);
-  };
+  randomOffers.length = randomOffersCount;
 
-  const offers = [
-    {id: `luggage`, offerLabel: `Add luggage`, offerPrice: getRandomPrice()},
-    {id: `comfort`, offerLabel: `Switch to comfort class`, offerPrice: getRandomPrice()},
-    {id: `meal`, offerLabel: `Add meal`, offerPrice: getRandomPrice()},
-    {id: `seats`, offerLabel: `Choose seats`, offerPrice: getRandomPrice()},
-    {id: `train`, offerLabel: `Travel by train`, offerPrice: getRandomPrice()}
-  ];
-
-  offers.length = randomOffersCount;
-
-  return offers;
+  return randomOffers;
 };
 
-// Генерация опимания точки маршрута
+// Генерация опиcания точки маршрута
 const generateDescription = () => {
   const descriptionList = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -109,20 +119,18 @@ const generatePhotoGallery = () => {
   return photos;
 };
 
-
 // Генерация объекта-точки маршрута
 export const generateTripPoint = () => {
   const start = dayjs();
   const end = generateEndTime();
 
   return {
-    allTypes: typeTripPoint,
     type: generateTripPointType(),
-    allLocations: cityList,
     location: generateCity(),
     start,
     end,
-    offers: generateOffers(),
+    offers: generateRandomOffers(),
+    offersTypes,
     description: generateDescription(),
     photoGallery: generatePhotoGallery(),
     tripPrice: getRandomInt(50, 200),
@@ -130,10 +138,11 @@ export const generateTripPoint = () => {
   };
 };
 
+
 // Генерация масива объектов-точек маршрута
 export const generateMocksCollection = (generatedItemCallback) => {
   const mocksCollection = [];
-  const MOCKS_COUNT = 20;
+  const MOCKS_COUNT = 12;
 
   for (let i = 0; i < MOCKS_COUNT; i++) {
     mocksCollection.push(generatedItemCallback());

@@ -1,28 +1,49 @@
-const appendOffers = (array) => {
-  let offers = ``;
+import {createElement} from "../utils/utils";
 
-  offers += array.map((obj) => {
+const renderOffers = (offers = {}) => {
+  return offers.map((offer) => {
     return `<div class="event__offer-selector">
-              <input class="event__offer-checkbox  visually-hidden" id="event-offer-${obj.id}-1" type="checkbox" name="event-offer-luggage" checked>
-              <label class="event__offer-label" for="event-offer-${obj.id}-1">
-                <span class="event__offer-title">${obj.offerLabel}</span>
+              <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.type}-1" type="checkbox" name="event-offer-luggage" checked>
+              <label class="event__offer-label" for="event-offer-${offer.type}-1">
+                <span class="event__offer-title">${offer.label}</span>
                 &plus;&euro;&nbsp;
-                <span class="event__offer-price">${obj.offerPrice}</span>
+                <span class="event__offer-price">${offer.price}</span>
               </label>
             </div>`;
-  });
-
-  return offers;
+  }).join(``);
 };
 
-export const createEventOfferTemplate = ({offers}) => {
+const createEventOfferTemplate = (offers) => {
   return `<section class="event__section  event__section--offers">
     <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
     <div class="event__available-offers">
 
-    ${appendOffers(offers)}
+    ${renderOffers(offers)}
 
     </div>
   </section>`;
 };
+
+export default class EventOffer {
+  constructor(offers = []) {
+    this._offers = offers;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createEventOfferTemplate(this._offers);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

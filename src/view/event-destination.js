@@ -1,22 +1,44 @@
-const appendImages = (array) => {
-  let images = ``;
+import {createElement} from "../utils/utils";
 
-  images += array.map((imageUrl) => {
-    return `<img class="event__photo" src="${imageUrl}" alt="Event photo">`;
-  });
-
-  return images;
+const renderImages = (images = []) => {
+  return `<div class="event__photos-container">
+            <div class="event__photos-tape">
+              ${images
+                .map((imageUrl) => {
+                  return `<img class="event__photo" src="${imageUrl}" alt="Event photo">`;
+                })
+                .join(``)}
+            </div>
+          </div>`;
 };
 
-export const createEventDestinationTemplate = ({photoGallery}, isGalleryShown) => {
+const createEventDestinationTemplate = (photoGallery) => {
   return `<section class="event__section  event__section--destination">
     <h3 class="event__section-title  event__section-title--destination">Destination</h3>
     <p class="event__destination-description">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
-
-    ${isGalleryShown ? `<div class="event__photos-container">
-      <div class="event__photos-tape">
-        ${appendImages(photoGallery)}
-      </div>
-    </div>` : ``}
+    ${photoGallery ? renderImages(photoGallery) : ``}
   </section>`;
 };
+
+export default class EventDestination {
+  constructor({photoGallery} = {}) {
+    this._photoGallery = photoGallery;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createEventDestinationTemplate(this._photoGallery);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
