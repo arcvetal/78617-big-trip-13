@@ -12,8 +12,8 @@ const getRandomInt = (a = 0, b = 1) => {
 const getRandomPrice = () => {
   return getRandomInt(MIN_PRICE, MAX_PRICE);
 };
-
-export const emptyListTemplate = `<p class="trip-events__msg">Click New Event to create your first point</p>`;
+export const ESCAPE_KEY_NAME = `Escape`;
+export const ESC_KEY_NAME = `Esc`;
 export const RANDOM_TOTAL_PRICE = 1300;
 
 export const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];

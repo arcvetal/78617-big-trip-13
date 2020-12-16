@@ -3,8 +3,7 @@ import OffersListView from './offers-list.js';
 import {showTime, getDateDiffDuration} from '../utils/date.js';
 
 const createTripPointTemplate = ({type, location, start, end, tripPrice, offers, isFavorite}) => {
-  const tripPointTime = getDateDiffDuration(start, end);
-  const {days, hours, minutes} = tripPointTime;
+  const {days, hours, minutes} = getDateDiffDuration(start, end);
 
   return `<li class="trip-events__item">
   <div class="event">
