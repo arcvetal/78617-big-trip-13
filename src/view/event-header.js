@@ -1,5 +1,5 @@
 import {formatDate} from '../utils/date.js';
-import {createElement} from '../utils/utils.js';
+import AbstractView from './abstract.js';
 
 const renderTypes = (types = []) => {
 
@@ -76,8 +76,9 @@ const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPo
   </header>`;
 };
 
-export default class EventHeader {
+export default class EventHeader extends AbstractView {
   constructor({type, location, start, end, tripPrice} = {}, tripPointTypes, locations, isEditForm) {
+    super();
     this._type = type;
     this._location = location;
     this._start = start;
@@ -86,22 +87,9 @@ export default class EventHeader {
     this._tripPointTypes = tripPointTypes;
     this._locations = locations;
     this._isEditForm = isEditForm;
-    this._element = null;
   }
 
   getTemplate() {
     return createEventHeaderTemplate(this._type, this._location, this._start, this._end, this._tripPrice, this._tripPointTypes, this._locations, this._isEditForm);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

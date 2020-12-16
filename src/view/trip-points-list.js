@@ -1,4 +1,4 @@
-import {createElement} from '../utils/utils.js';
+import AbstractView from './abstract.js';
 
 const createTripPointsListTemplate = (tripPointsLength) => {
   if (tripPointsLength > 0) {
@@ -8,25 +8,13 @@ const createTripPointsListTemplate = (tripPointsLength) => {
   return `<p class="trip-events__msg">Click New Event to create your first point</p>`;
 };
 
-export default class TripPointsList {
+export default class TripPointsList extends AbstractView {
   constructor(tripPointsLength) {
+    super();
     this._tripPointsLength = tripPointsLength;
-    this._element = null;
   }
 
   getTemplate() {
     return createTripPointsListTemplate(this._tripPointsLength);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

@@ -7,7 +7,7 @@ import TripPointsListView from './view/trip-points-list.js';
 import TripPointView from './view/trip-point.js';
 import TripInfoView from './view/trip-info.js';
 import TripPriceView from './view/trip-price.js';
-import {renderElement, RenderPosition} from './utils/utils.js';
+import {renderElement, RenderPosition, replace} from './utils/render.js';
 
 // Mocks
 import {generateTripPoint, tripPointTypes, locations, offers, generateMocksCollection, RANDOM_TOTAL_PRICE, ESCAPE_KEY_NAME, ESC_KEY_NAME} from './mock/mocks.js';
@@ -17,8 +17,6 @@ const tripControlsElement = document.querySelector('.trip-controls');
 const tripControlsMenuElement = tripControlsElement.querySelector('h2:first-of-type');
 const tripEventsSectionElement = document.querySelector('.trip-events');
 const tripEventsTitleElement = tripEventsSectionElement.querySelector('h2');
-
-
 
 // Сгенерируем масив обьектов-моков
 const tripPoints = generateMocksCollection(generateTripPoint);
@@ -32,11 +30,11 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
   const edittripPointItemElement = editTripPointComponent.getElement();
 
   const replacePointToFormEdit = () => {
-    container.replaceChild(edittripPointItemElement, tripPointItemElement);
+    replace(edittripPointItemElement, tripPointItemElement);
   };
 
   const replaceFormEditToPoint = () => {
-    container.replaceChild(tripPointItemElement, edittripPointItemElement);
+    replace(tripPointItemElement, edittripPointItemElement);
   };
 
   const onEscKeyDown = (evt) => {
@@ -47,42 +45,41 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
     }
   }
 
-  editTripPointComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', () => {
+  editTripPointComponent.setEditClickHandler(() => {
     replaceFormEditToPoint();
     document.removeEventListener('keydown', onEscKeyDown);
   });
 
-  tripPointComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', () => {
+  tripPointComponent.setTripPointClickHandler(() => {
     replacePointToFormEdit();
     document.addEventListener('keydown', onEscKeyDown);
   });
 
-  editTripPointComponent.getElement().querySelector('form').addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  editTripPointComponent.setFormSubmitHandler(() => {
     replaceFormEditToPoint();
     document.removeEventListener('keydown', onEscKeyDown);
   });
 
-  renderElement(container, tripPointComponent.getElement(), RenderPosition.BEFOREEND);
+  renderElement(container, tripPointComponent, RenderPosition.BEFOREEND);
 }
 
 // Добавмим информацию о маршруте
-renderElement(tripMainElement, new TripInfoView(locations).getElement(), RenderPosition.AFTERBEGIN);
+renderElement(tripMainElement, new TripInfoView(locations), RenderPosition.AFTERBEGIN);
 
 // Добавим стоимость поездки
-renderElement(tripMainElement, new TripPriceView(RANDOM_TOTAL_PRICE).getElement(), RenderPosition.BEFOREEND);
+renderElement(tripMainElement, new TripPriceView(RANDOM_TOTAL_PRICE), RenderPosition.BEFOREEND);
 
 // Добавим меню
-renderElement(tripControlsMenuElement, new MenuView().getElement(), RenderPosition.AFTEREND);
+renderElement(tripControlsMenuElement, new MenuView(), RenderPosition.AFTEREND);
 
 // Добавим фильтры
-renderElement(tripControlsElement, new FiltersView().getElement(), RenderPosition.BEFOREEND);
+renderElement(tripControlsElement, new FiltersView(), RenderPosition.BEFOREEND);
 
 // Если tripPoints.length === 0, то в tripPointsListElement отобразится сообщение о добавлении первой точки
 const tripPointsListElement = new TripPointsListView(tripPoints.length).getElement();
 
 // Добавим сортировку
-renderElement(tripEventsTitleElement, new ListSortView().getElement(), RenderPosition.AFTEREND);
+renderElement(tripEventsTitleElement, new ListSortView(), RenderPosition.AFTEREND);
 
 renderElement(tripEventsSectionElement, tripPointsListElement, RenderPosition.BEFOREEND);
 

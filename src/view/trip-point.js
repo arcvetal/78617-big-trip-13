@@ -1,4 +1,4 @@
-import {createElement} from '../utils/utils.js';
+import AbstractView from './abstract.js';
 import OffersListView from './offers-list.js';
 import {showTime, getDateDiffDuration} from '../utils/date.js';
 
@@ -41,25 +41,24 @@ const createTripPointTemplate = ({type, location, start, end, tripPrice, offers,
 </li>`;
 };
 
-export default class TripPoint {
+export default class TripPoint extends AbstractView {
   constructor(tripItem) {
+    super();
     this._tripItem = tripItem;
-    this._element = null;
+    this._tripPointClickHandler = this._tripPointClickHandler.bind(this);
   }
 
   getTemplate() {
     return createTripPointTemplate(this._tripItem);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _tripPointClickHandler() {
+    this._callback.tripPointClick();
   }
 
-  removeElement() {
-    this._element = null;
+  setTripPointClickHandler(callback) {
+    this._callback.tripPointClick = callback;
+
+    this.getElement().querySelector(`.event__rollup-btn`).addEventListener(`click`, this._tripPointClickHandler);
   }
 }
