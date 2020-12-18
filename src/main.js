@@ -7,10 +7,11 @@ import TripPointsListView from './view/trip-points-list.js';
 import TripPointView from './view/trip-point.js';
 import TripInfoView from './view/trip-info.js';
 import TripPriceView from './view/trip-price.js';
-import {renderElement, RenderPosition, replace} from './utils/render.js';
+import {renderElement, RenderPosition, replaceElement} from './utils/render.js';
 
 // Mocks
-import {generateTripPoint, tripPointTypes, locations, offers, generateMocksCollection, RANDOM_TOTAL_PRICE, ESCAPE_KEY_NAME, ESC_KEY_NAME} from './mock/mocks.js';
+import {generateTripPoint, tripPointTypes, locations, offers, generateMocksCollection, RANDOM_TOTAL_PRICE} from './mock/mocks.js';
+import {ESCAPE_KEY_NAME, ESC_KEY_NAME} from './utils/common.js';
 
 const tripMainElement = document.querySelector('.trip-main');
 const tripControlsElement = document.querySelector('.trip-controls');
@@ -26,15 +27,12 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
   const tripPointComponent = new TripPointView(tripPoint);
   const editTripPointComponent = new EditTripPointView(tripPoint, tripPointTypes, locations, offers);
 
-  const tripPointItemElement = tripPointComponent.getElement();
-  const edittripPointItemElement = editTripPointComponent.getElement();
-
   const replacePointToFormEdit = () => {
-    replace(edittripPointItemElement, tripPointItemElement);
+    replaceElement(editTripPointComponent, tripPointComponent);
   };
 
   const replaceFormEditToPoint = () => {
-    replace(tripPointItemElement, edittripPointItemElement);
+    replaceElement(tripPointComponent, editTripPointComponent);
   };
 
   const onEscKeyDown = (evt) => {
@@ -43,21 +41,24 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
       replaceFormEditToPoint();
       document.removeEventListener('keydown', onEscKeyDown);
     }
-  }
+  };
 
-  editTripPointComponent.setEditClickHandler(() => {
+  const onEditFormClose = () => {
     replaceFormEditToPoint();
     document.removeEventListener('keydown', onEscKeyDown);
+  };
+
+  editTripPointComponent.setEditClickHandler(() => {
+    onEditFormClose();
+  });
+
+  editTripPointComponent.setFormSubmitHandler(() => {
+    onEditFormClose();
   });
 
   tripPointComponent.setTripPointClickHandler(() => {
     replacePointToFormEdit();
     document.addEventListener('keydown', onEscKeyDown);
-  });
-
-  editTripPointComponent.setFormSubmitHandler(() => {
-    replaceFormEditToPoint();
-    document.removeEventListener('keydown', onEscKeyDown);
   });
 
   renderElement(container, tripPointComponent, RenderPosition.BEFOREEND);

@@ -30,7 +30,7 @@ const generateButtonsBlock = (isEdit) => {
   }
 };
 
-const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPointTypes, locations, isEditForm) => {
+const createEventHeaderTemplate = ({type, location, start, end, tripPrice}, tripPointTypes, locations, isEdit) => {
 
   return `<header class="event__header">
     <div class="event__type-wrapper">
@@ -72,24 +72,20 @@ const createEventHeaderTemplate = (type, location, start, end, tripPrice, tripPo
       </label>
       <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="">
     </div>
-    ${generateButtonsBlock(isEditForm)}
+    ${generateButtonsBlock(isEdit)}
   </header>`;
 };
 
 export default class EventHeader extends AbstractView {
-  constructor({type, location, start, end, tripPrice} = {}, tripPointTypes, locations, isEditForm) {
+  constructor(tripItem, tripPointTypes, locations, isEdit) {
     super();
-    this._type = type;
-    this._location = location;
-    this._start = start;
-    this._end = end;
-    this._tripPrice = tripPrice;
+    this._tripItem = tripItem;
     this._tripPointTypes = tripPointTypes;
     this._locations = locations;
-    this._isEditForm = isEditForm;
+    this._isEdit = isEdit;
   }
 
   getTemplate() {
-    return createEventHeaderTemplate(this._type, this._location, this._start, this._end, this._tripPrice, this._tripPointTypes, this._locations, this._isEditForm);
+    return createEventHeaderTemplate(this._tripItem, this._tripPointTypes, this._locations, this._isEdit);
   }
 }

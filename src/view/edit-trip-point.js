@@ -10,7 +10,7 @@ const createEditTripPointTemplate = (tripItem, tripPointTypes, locations, offers
     <form class="event event--edit" action="#" method="post">
       ${new EventHeaderView(tripItem, tripPointTypes, locations, IS_EDIT).getTemplate()}
       ${new EventOfferView(offers).getTemplate()}
-      ${new EventDestinationView(tripItem).getTemplate()}
+      ${new EventDestinationView(tripItem.photoGallery).getTemplate()}
     </form>
   </li>`;
 };

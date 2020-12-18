@@ -21,7 +21,7 @@ const createEventDestinationTemplate = (photoGallery) => {
 };
 
 export default class EventDestination extends AbstractView {
-  constructor({photoGallery} = {}) {
+  constructor(photoGallery) {
     super();
     this._photoGallery = photoGallery;
   }

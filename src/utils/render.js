@@ -32,7 +32,7 @@ export const renderElement = (container, child, place) => {
   }
 };
 
-export const replace = (newChild, oldChild) => {
+export const replaceElement = (newChild, oldChild) => {
   if (newChild instanceof Abstract) {
     newChild = newChild.getElement();
   }
