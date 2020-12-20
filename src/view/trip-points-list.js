@@ -1,27 +1,20 @@
-import {createElement} from '../utils/utils.js';
+import AbstractView from './abstract.js';
 
-const createTripPointsListTemplate = () => {
-  return `<ul class="trip-events__list"></ul>`;
+const createTripPointsListTemplate = (tripPointsLength) => {
+  if (tripPointsLength > 0) {
+    return `<ul class="trip-events__list"></ul>`;
+  }
+
+  return `<p class="trip-events__msg">Click New Event to create your first point</p>`;
 };
 
-export default class TripPointsList {
-  constructor() {
-    this._element = null;
+export default class TripPointsList extends AbstractView {
+  constructor(tripPointsLength) {
+    super();
+    this._tripPointsLength = tripPointsLength;
   }
 
   getTemplate() {
-    return createTripPointsListTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+    return createTripPointsListTemplate(this._tripPointsLength);
   }
 }

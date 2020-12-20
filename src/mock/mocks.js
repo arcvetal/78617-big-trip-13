@@ -1,19 +1,13 @@
 import dayjs from 'dayjs';
+import {getRandomInt} from '../utils/common.js';
 
 const MIN_PRICE = 10;
 const MAX_PRICE = 100;
-
-const getRandomInt = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
 
 const getRandomPrice = () => {
   return getRandomInt(MIN_PRICE, MAX_PRICE);
 };
 
-export const emptyListTemplate = `<p class="trip-events__msg">Click New Event to create your first point</p>`;
 export const RANDOM_TOTAL_PRICE = 1300;
 
 export const tripPointTypes = [`Taxi`, `Bus`, `Train`, `Ship`, `Transport`, `Drive`, `Flight`, `Check-in`, `Sightseeing`, `Restaurant`];
