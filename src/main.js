@@ -22,6 +22,9 @@ const tripEventsTitleElement = tripEventsSectionElement.querySelector('h2');
 // Сгенерируем масив обьектов-моков
 const tripPoints = generateMocksCollection(generateTripPoint);
 
+// Если tripPoints.length === 0, то в tripPointsListElement отобразится сообщение о добавлении первой точки
+const tripPointsListElement = new TripPointsListView(tripPoints.length).getElement();
+
 // Функция отрисовки точки маршрута
 const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers) => {
   const tripPointComponent = new TripPointView(tripPoint);
@@ -35,17 +38,16 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
     replaceElement(tripPointComponent, editTripPointComponent);
   };
 
-  const onEscKeyDown = (evt) => {
-    if (evt.key === ESCAPE_KEY_NAME || evt.key === ESC_KEY_NAME) {
-      evt.preventDefault();
-      replaceFormEditToPoint();
-      document.removeEventListener('keydown', onEscKeyDown);
-    }
-  };
-
   const onEditFormClose = () => {
     replaceFormEditToPoint();
     document.removeEventListener('keydown', onEscKeyDown);
+  };
+
+  const onEscKeyDown = (evt) => {
+    if (evt.key === ESCAPE_KEY_NAME || evt.key === ESC_KEY_NAME) {
+      evt.preventDefault();
+      onEditFormClose();
+    }
   };
 
   editTripPointComponent.setEditClickHandler(() => {
@@ -75,9 +77,6 @@ renderElement(tripControlsMenuElement, new MenuView(), RenderPosition.AFTEREND);
 
 // Добавим фильтры
 renderElement(tripControlsElement, new FiltersView(), RenderPosition.BEFOREEND);
-
-// Если tripPoints.length === 0, то в tripPointsListElement отобразится сообщение о добавлении первой точки
-const tripPointsListElement = new TripPointsListView(tripPoints.length).getElement();
 
 // Добавим сортировку
 renderElement(tripEventsTitleElement, new ListSortView(), RenderPosition.AFTEREND);

@@ -17,17 +17,16 @@ const renderLocations = (locations = []) => {
   }).join(``);
 };
 
-const generateButtonsBlock = (isEdit) => {
+const renderButtons = (isEdit) => {
   if (isEdit) {
     return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
       <button class="event__reset-btn" type="reset">Delete</button>
       <button class="event__rollup-btn" type="button">
         <span class="visually-hidden">Open event</span>
       </button>`;
-  } else {
-    return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</  button>
-    <button class="event__reset-btn" type="reset">Cancel</button>`;
   }
+  return `<button class="event__save-btn  btn  btn--blue" type="submit">Save</  button>
+    <button class="event__reset-btn" type="reset">Cancel</button>`;
 };
 
 const createEventHeaderTemplate = ({type, location, start, end, tripPrice}, tripPointTypes, locations, isEdit) => {
@@ -72,7 +71,7 @@ const createEventHeaderTemplate = ({type, location, start, end, tripPrice}, trip
       </label>
       <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="">
     </div>
-    ${generateButtonsBlock(isEdit)}
+    ${renderButtons(isEdit)}
   </header>`;
 };
 
