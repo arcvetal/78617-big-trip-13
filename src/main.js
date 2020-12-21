@@ -25,6 +25,8 @@ const tripPoints = generateMocksCollection(generateTripPoint);
 // Если tripPoints.length === 0, то в tripPointsListElement отобразится сообщение о добавлении первой точки
 const tripPointsListElement = new TripPointsListView(tripPoints.length).getElement();
 
+
+
 // Функция отрисовки точки маршрута
 const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers) => {
   const tripPointComponent = new TripPointView(tripPoint);
@@ -66,6 +68,9 @@ const renderTripPoint = (container, tripPoint, tripPointTypes, locations, offers
   renderElement(container, tripPointComponent, RenderPosition.BEFOREEND);
 }
 
+
+
+
 // Добавмим информацию о маршруте
 renderElement(tripMainElement, new TripInfoView(locations), RenderPosition.AFTERBEGIN);
 
@@ -81,8 +86,12 @@ renderElement(tripControlsElement, new FiltersView(), RenderPosition.BEFOREEND);
 // Добавим сортировку
 renderElement(tripEventsTitleElement, new ListSortView(), RenderPosition.AFTEREND);
 
+
+
+// Вставим список без точек
 renderElement(tripEventsSectionElement, tripPointsListElement, RenderPosition.BEFOREEND);
 
+// Наполним список точками маршрута
 if (tripPointsListElement.classList.contains('trip-events__list')) {
   for (const item of tripPoints) {
     renderTripPoint(tripPointsListElement, item, tripPointTypes, locations, offers);
