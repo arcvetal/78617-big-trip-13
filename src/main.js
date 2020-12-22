@@ -4,6 +4,7 @@ import FiltersView from './view/filters.js';
 import ListSortView from './view/list-sort.js';
 import MenuView from './view/menu.js';
 import TripPointsListView from './view/trip-points-list.js';
+import TripPointsListEmptyView from './view/trip-points-list-empty.js';
 import TripPointView from './view/trip-point.js';
 import TripInfoView from './view/trip-info.js';
 import TripPriceView from './view/trip-price.js';
@@ -23,8 +24,14 @@ const tripEventsTitleElement = tripEventsSectionElement.querySelector('h2');
 const tripPoints = generateMocksCollection(generateTripPoint);
 
 // Если tripPoints.length === 0, то в tripPointsListElement отобразится сообщение о добавлении первой точки
-const tripPointsListElement = new TripPointsListView(tripPoints.length).getElement();
 
+let tripPointsListElement;
+
+if (tripPoints.length === 0) {
+  tripPointsListElement  = new TripPointsListEmptyView().getElement();
+} else {
+  tripPointsListElement = new TripPointsListView().getElement();
+}
 
 
 // Функция отрисовки точки маршрута
@@ -78,9 +85,11 @@ renderElement(tripMainElement, new TripInfoView(locations), RenderPosition.AFTER
 renderElement(tripMainElement, new TripPriceView(RANDOM_TOTAL_PRICE), RenderPosition.BEFOREEND);
 
 // Добавим меню
+//
 renderElement(tripControlsMenuElement, new MenuView(), RenderPosition.AFTEREND);
 
 // Добавим фильтры
+//
 renderElement(tripControlsElement, new FiltersView(), RenderPosition.BEFOREEND);
 
 // Добавим сортировку
