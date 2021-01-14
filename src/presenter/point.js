@@ -11,12 +11,14 @@ export default class Point {
   }
 
   init(tripPoint, tripPointTypes, locations, offers) {
+
     this._tripPointComponent = new TripPointView(tripPoint);
     this._editTripPointComponent = new EditTripPointView(tripPoint, tripPointTypes, locations, offers);
     this._editTripPointComponent.setEditClickHandler(this._onEditFormClose);
     this._editTripPointComponent.setFormSubmitHandler(this._onEditFormClose);
     this._tripPointComponent.setTripPointClickHandler(this._replacePointToFormEdit);
     renderElement(this._container, this._tripPointComponent, RenderPosition.BEFOREEND);
+
   }
 
   _replacePointToFormEdit() {
